@@ -1,0 +1,40 @@
+#include <stdio.h>
+
+int main() {
+  int angulo,volta,quadrante;
+
+  //Verificar eixo
+  scanf("%d", &angulo);
+  if (angulo%90 == 0) {
+    printf ("Este ângulo se encontra em um dos eixos\n"); 
+  }
+
+  //Verificar quadrante
+  if (angulo>0) quadrante=angulo%360;
+  else quadrante=angulo%360+360;
+  
+  if (quadrante>=0 && quadrante<=90) {
+  printf ("Primeiro quadrante\n");
+  }
+  else if (quadrante>90 && quadrante<=180) {
+    printf ("Segundo quadrante\n");
+  }
+  else if (quadrante>180 && quadrante<=270) {
+    printf ("Terceiro quadrante\n");
+  }
+  else if (quadrante>270 && quadrante<=360) {
+    printf ("Quarto quadrante\n");
+  }
+
+  //Verificar volta e sentido
+  if (angulo>=0 || angulo==0) {
+    volta=angulo/360;
+    printf ("%d volta(s) (Sentido horário)\n",volta);
+    printf ("Falta(m) %d grau(s) para completar uma volta\n",360-(angulo%360));
+  }else{
+    volta=angulo*-1/360;
+    printf ("%d volta(s) (sentido anti-horário)\n",volta);
+    printf ("Falta(m) %d grau(s) para completar uma volta\n",360-((angulo*-1)%360));
+  }
+  return 0;
+}
