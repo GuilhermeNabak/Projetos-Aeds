@@ -4,7 +4,8 @@ int main() {
   int angulo,volta,quadrante;
 
   //Verificar eixo
-  scanf("%d", &angulo);
+  printf ("Ângulo: ");
+  scanf ("%d", &angulo);
   if (angulo%90 == 0) {
     printf ("Este ângulo se encontra em um dos eixos\n"); 
   }
