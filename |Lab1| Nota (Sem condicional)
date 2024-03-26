@@ -1,17 +1,18 @@
 #include <stdio.h>
 
 int main(void) {
-  int sim_ou_nao,nota;
-  scanf("%d",&nota);
- 
-  sim_ou_nao='N'+5*(nota/60);
-  printf("%c\n",sim_ou_nao);
-  
-  sim_ou_nao='N'+5*(1-nota/60)*(nota/45);
-  printf("%c\n",sim_ou_nao);
- 
-  sim_ou_nao='N'+5*(1-nota/45)*(1-nota/90);
-  printf("%c\n",sim_ou_nao);
-  
+  int sim_ou_nao, nota;
+  printf("Digite a nota");
+  scanf("%d", &nota);
+
+  sim_ou_nao = 'N' + 5 * (nota / 60);
+  printf("%c\n", sim_ou_nao);
+
+  sim_ou_nao = 'N' + 5 * (1 - nota / 60) * (nota / 45);
+  printf("%c\n", sim_ou_nao);
+
+  sim_ou_nao = 'N' + 5 * (1 - nota / 45) * (1 - nota / 90);
+  printf("%c\n", sim_ou_nao);
+
   return 0;
 }
