@@ -6,7 +6,7 @@ int main() {
   scanf("%d%*c", &numero);
   scanf("%c%*c", &letra);
 
-  //Quadrado preenchido
+  // Quadrado preenchido
   if (letra == 'c') {
     for (int l = 0; l < numero; l++) {
       for (int c = 0; c < numero; c++) {
@@ -16,11 +16,11 @@ int main() {
     }
   }
 
-  //Somente bordas
+  // Somente bordas
   else if (letra == 'b') {
     for (int l = 0; l < numero; l++) {
       for (int c = 0; c < numero; c++) {
-        if (l == 0 || l == numero-1 || c == 0 || c == numero-1)
+        if (l == 0 || l == numero - 1 || c == 0 || c == numero - 1)
           printf(" *");
         else
           printf("  ");
@@ -29,11 +29,12 @@ int main() {
     }
   }
 
-  //Diagonal secundária
+  // Diagonal secundária
   else if (letra == 's') {
     for (int l = 0; l < numero; l++) {
       for (int c = 0; c < numero; c++) {
-        if (l == 0 || l == numero-1 || c == 0 || c == numero-1 || l+c == numero-1)
+        if (l == 0 || l == numero - 1 || c == 0 || c == numero - 1 ||
+            l + c == numero - 1)
           printf(" *");
         else
           printf("  ");
@@ -42,11 +43,11 @@ int main() {
     }
   }
 
-  //Diagonal principal
+  // Diagonal principal
   else if (letra == 'p') {
     for (int l = 0; l < numero; l++) {
       for (int c = 0; c < numero; c++) {
-        if (l == 0 || l == numero-1 || c == 0 || c == numero-1 || l == c)
+        if (l == 0 || l == numero - 1 || c == 0 || c == numero - 1 || l == c)
           printf(" *");
         else
           printf("  ");
@@ -55,11 +56,12 @@ int main() {
     }
   }
 
-  //Divisão horizontal
+  // Divisão horizontal
   else if (letra == 'h') {
     for (int l = 0; l < numero; l++) {
       for (int c = 0; c < numero; c++) {
-        if (l == 0 || l == numero-1 || c == 0 || c == numero-1 || l == numero/2)
+        if (l == 0 || l == numero - 1 || c == 0 || c == numero - 1 ||
+            l == numero / 2)
           printf(" *");
         else
           printf("  ");
@@ -68,11 +70,12 @@ int main() {
     }
   }
 
-  //divição vertical
+  // divição vertical
   else if (letra == 'v') {
     for (int l = 0; l < numero; l++) {
       for (int c = 0; c < numero; c++) {
-        if (l == 0 || l == numero - 1 || c == 0 || c == numero - 1 || c == numero/2)
+        if (l == 0 || l == numero - 1 || c == 0 || c == numero - 1 ||
+            c == numero / 2)
           printf(" *");
         else
           printf("  ");
@@ -80,10 +83,10 @@ int main() {
       printf("\n");
     }
   }
-  
+
   else {
-    printf ("Não existe essa opção");
+    printf("Não existe essa opção");
   }
-  
+
   return 0;
 }
