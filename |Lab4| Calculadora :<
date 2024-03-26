@@ -1,0 +1,133 @@
+#include <stdio.h>
+int main() {
+  int x, y, resultado, calculo;
+
+  printf("Numero do calculo: ");
+  scanf("%d%*c", &calculo);
+
+  while (calculo != 0) {
+    printf("Primeiro numero: ");
+    scanf("%d%*c", &x); // x <-- primeiro numero
+    printf("Segundo numero: ");
+    scanf("%d%*c", &y); // y <-- segundo numero
+
+    //Inversão para positivo nos casos 6 a 9
+    if (x < 0 && calculo > 5) {
+      x *= -1;
+    }
+    if (y < 0 && calculo > 5) {
+      y *= -1;
+    }
+  
+    // Caso 1 
+    if (calculo == 1) {
+      resultado = x + y;
+      printf("Resultado: %d\n", resultado);
+    }
+
+    // Caso 2 
+    else if (calculo == 2) {
+      resultado = x - y;
+      printf("Resultado: %d\n", resultado);
+    }
+
+    // Caso 3 
+    else if (calculo == 3) {
+      resultado = x / y;
+      printf("Resultado: %d\n", resultado);
+    }
+
+    // Caso 4 
+    else if (calculo == 4) {
+      resultado = x * y;
+      printf("Resultado: %d\n", resultado);
+    }
+
+    // Caso 5 
+    else if (calculo == 5) {
+      int acc;
+      acc = y; // acc <-- y
+      for (int i = 1; i < x; i++) { // Enquanto i for menor que x
+        acc *= y; // acc * y
+      }
+      printf("Resultado: %d\n", acc);
+    }
+
+    // Caso 6 
+    else if (calculo == 6) {
+      // :(
+    }
+
+    // Caso 7 
+    else if (calculo == 7) {
+      int digito1, digito2, invertidox, invertidoy;
+      invertidox = 0;
+      invertidoy = 0;
+
+      while (x != 0) {
+        invertidox = invertidox * 10 + x % 10; // Inverte o valor de x
+        x /= 10;
+      }
+      while (y != 0) {
+        invertidoy = invertidoy * 10 + y % 10; // Inverte o valor de y
+        y /= 10;
+      }
+
+      printf("Resultado: ");
+      while (invertidox > 0 || invertidoy > 0) {
+        digito1 = invertidox % 10; // digito1 <-- ultimo digito de x
+        digito2 = invertidoy % 10; // digito2 <-- ultimo digito de y
+        resultado = digito1 + digito2; // Soma os dois digitos
+        printf("%d", resultado);
+        invertidox /= 10; // Passa para o proximo digito
+        invertidoy /= 10; // Passa para o proximo digito
+      }
+      printf("\n");
+    }
+
+    // Caso 8 
+    else if (calculo == 8) {
+      int digito1, digito2, invertidox, invertidoy;
+      invertidox = 0;
+      invertidoy = 0;
+
+      while (x != 0) {
+        invertidox = invertidox * 10 + x % 10; // Inverte o valor de x
+        x /= 10;
+      }
+      while (y != 0) {
+        invertidoy = invertidoy * 10 + y % 10; // Inverte o valor de y
+        y /= 10;
+      }
+
+      printf("Resultado: ");
+      while (invertidox > 0 || invertidoy > 0) {
+        digito1 = invertidox % 10; // digito1 <-- ultima casa decimal de x
+        digito2 = invertidoy % 10; // digito2 <-- ultima casa decimal de y
+        printf("%d", digito1);
+        printf("%d", digito2);
+        invertidox /= 10; // Passa para o proximo digito
+        invertidoy /= 10; // Passa para o proximo digito
+      }
+      printf("\n");
+    }
+
+    // Caso 9
+    else if (calculo == 9) {
+      int digito1;
+      printf("Resultado: ");
+      printf("%d", x); // Imprime primeiro numero
+
+      while (y > 0) {
+        digito1 = y % 10; // digito1 <-- ultimo digito
+        printf("%d", digito1);
+        y /= 10; // Passa para o proximo digito
+      }
+      printf("\n");
+    }
+
+    printf("Proximo calculo: "); 
+    scanf("%d%*c", &calculo); // Reinicia o loop de escolha do calculo
+  }
+  return 0;
+}
