@@ -1,0 +1,198 @@
+#include <math.h>
+#include <stdio.h>
+int main() {
+  int sequencia[9];
+  int opcao, resultado;
+
+  for (int i = 0; i < 10; i++) {
+    scanf("%d", &sequencia[i]);
+  }
+
+  scanf("%d", &opcao);
+
+  while (opcao == 1 || opcao == 2) {
+
+    if (opcao == 1) {
+      int digito, numero;
+      scanf("%d", &digito);
+      scanf("%d", &numero);
+      sequencia[digito] = numero;
+    }
+
+    else if (opcao == 2) {
+      for (int i = 0; i < 10; i++) {
+        printf("%d ", sequencia[i]);
+      }
+      printf("\n");
+    }
+    scanf("%d", &opcao);
+  }
+
+  while (opcao > 2) {
+
+    if (opcao == 3) {
+      int digito;
+      for (int i = 0, j = 9; i < j; i++, j--) {
+        digito = sequencia[i]; 
+        sequencia[i] = sequencia[j];
+        sequencia[j] = digito;
+      }
+      for (int i = 0; i < 10; i++) {
+        printf("%d ", sequencia[i]);
+      }
+      printf("\n");
+    }
+
+    else if (opcao == 4) {
+      int somatoria; 
+      somatoria = 0;
+      for (int i = 0; i < 10; i++) {
+        somatoria += sequencia[i];
+      }
+      printf("%d ", somatoria);
+      printf("\n");
+    }
+
+    else if (opcao == 5) {
+      int duplicados;
+      duplicados = 0;
+      for (int i = 0; i < 10; i++) {
+        for (int j = 0; j < 10; j++) {
+          if (sequencia[i] == sequencia[j]) {
+            duplicados++;
+          }
+        }
+      }
+      printf("%d ", duplicados - 10); //-10 remove numeros os 10 numeros iguais de i entre j
+      printf("\n");
+    }
+
+    else if (opcao == 6) {
+    }
+
+    else if (opcao == 7) {
+    }
+
+    else if (opcao == 8) {
+      int maior, menor;
+      float media;
+      media = 0;
+      maior = 0;
+
+      for (int i = 0; i < 10; i++) {
+        if (sequencia[i] > maior) {
+          maior = sequencia[i]; //Se for maior que o anterior (maior <--)
+        }
+      }
+
+      menor = maior;
+      for (int i = 0; i < 10; i++) { 
+        if (sequencia[i] < menor) {
+          menor = sequencia[i]; //Se for menor que o anterior (menor <--)
+        }
+      }
+
+      for (int i = 0; i < 10; i++) {
+        media += sequencia[i];
+      }
+
+      printf("%d ", maior);
+      printf("%d ", menor);
+      printf("%.2f ", media / 10);
+      printf("\n");
+    }
+
+    else if (opcao == 9) {
+      int digito, mediana;
+      digito = 0;
+      mediana = 0;
+      for (int i = 0; i < 10 - 1; i++) { //Altera a sequencia para ordem crescente
+        for (int j = i + 1; j < 10; j++) {
+          if (sequencia[i] > sequencia[j]) {
+            digito = sequencia[i];
+            sequencia[i] = sequencia[j];
+            sequencia[j] = digito;
+          }
+        }
+      }
+      mediana = (sequencia[4] + sequencia[5]);
+      mediana /= 2;
+      printf("%d", mediana);
+      printf("\n");
+    }
+
+    else if (opcao == 10) {
+      int digito;
+      digito = 0;
+      for (int i = 0; i < 10 - 1; i++) {
+        for (int j = i + 1; j < 10; j++) {
+          if (sequencia[i] > sequencia[j]) {
+            digito = sequencia[i];
+            sequencia[i] = sequencia[j];
+            sequencia[j] = digito;
+          }
+        }
+      }
+      for (int i = 0; i < 10; i++) {
+        printf("%d ", sequencia[i]);
+      }
+    }
+
+    else if (opcao == 11) {
+      int digito;
+      digito = 0;
+      for (int i = 0; i < 10 - 1; i++) {
+        for (int j = i + 1; j < 10; j++) {
+          if (sequencia[i] < sequencia[j]) {
+            digito = sequencia[i];
+            sequencia[i] = sequencia[j];
+            sequencia[j] = digito;
+          }
+        }
+      }
+      for (int i = 0; i < 10; i++) {
+        printf("%d ", sequencia[i]);
+      }
+    }
+
+    else if (opcao == 12) {
+    }
+
+    else if (opcao == 13) {
+      int digito, rotacao;
+      scanf("%d", &rotacao);
+      
+      for (int i = 0; i < rotacao; i++) {
+          digito = sequencia[0]; //Armazena o primeiro elemento
+          for (int j = 0; j < 9; j++) { //Move para esquerda
+                sequencia[j] = sequencia[j + 1];
+          }
+            sequencia[9] = digito; //Coloca o primeiro elemento no final
+      }
+      for (int i = 0; i < 10; i++) {
+      printf("%d ", sequencia[i]);
+      }
+    }
+
+    else if (opcao == 14) {
+      int digito, rotacao;
+      scanf("%d", &rotacao);
+
+      for (int i = 0; i < rotacao; i++) {
+          digito = sequencia[9]; //Armazena o ultimo elemento
+          for (int j = 9; j > 0; j--) { //Move para direita
+                sequencia[j] = sequencia[j - 1];
+          }
+            sequencia[0] = digito; //Coloca o ultimo elemento no inicio
+      }
+      for (int i = 0; i < 10; i++) {
+      printf("%d ", sequencia[i]);
+      }
+    }
+    
+    scanf("%d", &opcao);
+  }
+  if (opcao == 0) { //Finaliza
+    return 0;
+  }
+}
