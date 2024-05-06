@@ -1,0 +1,124 @@
+#include <stdio.h>
+
+// Função para remover algarismo
+int removerAlgarismo(int num, int indice) {
+  int digito = num % 10;
+  if (indice == 0) {
+    return num / 10;
+  } else {
+    int novoNum =
+        removerAlgarismo(num / 10, indice - 1); // Separa o digito e remove
+    return (novoNum * 10) + digito;
+  }
+}
+
+// Função para adicionar algarismo
+int adicionarAlgarismo(int num, int indice, int algarismo) {
+  if (indice == -1) {
+    return (num * 10) + algarismo; // add algarismo
+  } else {
+    int digito = num % 10;
+    return adicionarAlgarismo(num / 10, indice - 1, algarismo) * 10 + digito;
+  }
+}
+
+// Função para contar algarismos
+int contarAlgarismos(int num) {
+  if (num == 0) {
+    return 0;
+  } else {
+    return 1 + contarAlgarismos(num / 10); // add 1 até chegar em 0
+  }
+}
+
+// Função para alternar algarismos
+int alternarAlgarismos(int num1, int num2) {
+  if (num1 < 10 || num2 < 10) {
+    return (num2 * 10) + num1;
+  } else {
+    int digito1 = num1 % 10;
+    int digito2 = num2 % 10;
+    return (alternarAlgarismos(num1 / 10, num2 / 10) * 100) + (digito2 * 10) +
+           digito1;
+  }
+}
+
+// Função para concatear numeros
+int concatenarNumeros(int num1, int num2) {
+  if (num2 == 0) {
+    return num1;
+  } else {
+    return concatenarNumeros(num1, num2 / 10) * 10 + (num2 % 10); //Separa os digitos de num2 para colocar em num1
+  }
+}
+
+// Função para inverter numero
+int inverterNumero(int num, int invertido) {
+  if (num == 0) {
+    return invertido;
+  } else {
+    invertido = invertido * 10 + num % 10;
+    return inverterNumero(num / 10, invertido); //Passa para próximo digito
+  }
+}
+
+// Função para remover pares
+int removerPares(int num) {
+  if (num == 0) {
+    return 0;
+  } else {
+    int digito = num % 10;
+    if (digito % 2 == 0) { //Se o resto = 0 retorna removendo o digito
+      return removerPares(num / 10);
+    } else {
+      return (removerPares(num / 10) * 10) + digito;
+    }
+  }
+}
+
+int main() {
+  int X, Y, op, indice;
+  scanf("%d", &X);
+  scanf("%d", &op);
+
+  while (op > 0) {
+
+    if (op == 1) {
+      scanf("%d", &indice);
+      X = removerAlgarismo(X, indice);
+    }
+
+    else if (op == 2) {
+      scanf("%d %d", &indice, &Y);
+      X = adicionarAlgarismo(X, indice - 1, Y);
+    }
+
+    else if (op == 3) {
+      printf("%d\n", contarAlgarismos(X));
+    }
+
+    else if (op == 4) {
+      scanf("%d", &Y);
+      X = alternarAlgarismos(X, Y);
+    }
+
+    else if (op == 5) {
+      scanf("%d", &Y);
+      X = concatenarNumeros(X, Y);
+    }
+
+    else if (op == 6) {
+      X = inverterNumero(X, 0);
+    }
+
+    else if (op == 7) {
+      X = removerPares(X);
+    }
+
+    else if (op >= 8) {
+      printf("%d", X);
+    }
+    scanf("%d", &op);
+  }
+  return 0;
+}
