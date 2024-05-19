@@ -1,0 +1,168 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void preencherMatriz(int **matriz, int *vetor, int linhas, int colunas, int i,int j, int *indice) {
+  if (i >= linhas) { // Se a linha atual excede o número de linhas, retorna
+    return;
+  }
+  
+  if (j >= colunas) { // Se a coluna atual excede o número de colunas, passa para a próxima linha
+    preencherMatriz(matriz, vetor, linhas, colunas, i + 1, 0, indice);
+    return;
+  }
+
+  matriz[i][j] = vetor[*indice]; // Atribui o valor do vetor à posição atual da matriz
+  (*indice)++; // Incrementa o índice do vetor
+
+  preencherMatriz(matriz, vetor, linhas, colunas, i, j + 1, indice);
+}
+
+void dobrarMatriz(int **matriz, int linhas, int colunas, int i, int j) {
+  if (i >= linhas) { // Se a linha atual excede o número de linhas, retorne
+    return;
+  }
+
+  if (j >= colunas) { // Se a coluna atual excede o número de colunas, passa para a próxima linha
+    dobrarMatriz(matriz, linhas, colunas, i + 1, 0);
+    return;
+  }
+
+  matriz[i][j] *= 2; // Dobra o valor na posição atual da matriz
+
+  dobrarMatriz(matriz, linhas, colunas, i, j + 1); // Chama recursivamente para a próxima coluna
+}
+
+void transporMatriz(int **matriz, int **transposta, int linhas, int colunas, int i, int j) { 
+  if (i >= linhas) { // Se a linha atual excede o número de linhas, retorne
+    return;
+  }
+
+  if (j >= colunas) { // Se a coluna atual excede o número de colunas, passa para a próxima linha
+
+    transporMatriz(matriz, transposta, linhas, colunas, i + 1, 0);
+    return;
+  }
+
+  transposta[j][i] = matriz[i][j]; // Atribui o valor da matriz à posição transposta
+
+  transporMatriz(matriz, transposta, linhas, colunas, i, j + 1); // Chama recursivamente para a próxima coluna
+}
+
+void espelharMatrizHrz(int **matriz, int linhas, int colunas, int i, int j) {
+  if (i >= linhas) { // Se a linha atual excede o número de linhas, retorne
+    return;
+  }
+
+  if (j >= colunas / 2) { // Se a coluna atual excede a metade do número de colunas, passa para a próxima linha
+    espelharMatrizHrz(matriz, linhas, colunas, i + 1, 0);
+    return;
+  }
+
+  int temp = matriz[i][j]; // Troca os valores espelhados horizontalmente
+  matriz[i][j] = matriz[i][colunas - j - 1];
+  matriz[i][colunas - j - 1] = temp;
+
+  espelharMatrizHrz(matriz, linhas, colunas, i, j + 1); // Chama recursivamente para a próxima coluna
+}
+
+void espelharMatrizVtc(int **matriz, int linhas, int colunas, int i, int j) {
+  if (j >= colunas) { // Se a coluna atual excede o número de colunas, termina a recursão
+    return;
+  }
+
+  if (i >= linhas / 2) { // Se a linha atual excede a metade do número de linhas, passa para a próxima coluna
+    espelharMatrizVtc(matriz, linhas, colunas, 0, j + 1);
+    return;
+  }
+  
+  int temp = matriz[i][j]; // Troca os valores espelhados verticalmente
+  matriz[i][j] = matriz[linhas - i - 1][j];
+  matriz[linhas - i - 1][j] = temp;
+
+  espelharMatrizVtc(matriz, linhas, colunas, i + 1, j); // Chama recursivamente para a próxima linha
+}
+
+void imprimirMatriz(int **matriz, int linhas, int colunas, int i, int j) {
+  if (i >= linhas) { // Se a linha atual excede o número de linhas, termina a recursão
+    return;
+  }
+  if (j >= colunas) { // Se a coluna atual excede o número de colunas, passa para a próxima linha
+    printf("\n");
+    imprimirMatriz(matriz, linhas, colunas, i + 1, 0);
+    return;
+  }
+
+  printf("%d ", matriz[i][j]); // Imprime o valor atual da matriz
+
+  imprimirMatriz(matriz, linhas, colunas, i, j + 1);
+}
+
+int main() {
+  int N, M, op;
+  int *vetor;
+  int **matriz;
+
+  scanf("%d", &N);
+  scanf("%d", &M);
+  scanf("%d", &op);
+
+  vetor = (int *)malloc(N * M * sizeof(int)); // Aloca memória para o vetor
+
+  for (int i = 0; i < N * M; i++) { // Lê os valores para o vetor
+    scanf("%d", &vetor[i]);
+  }
+
+  matriz = (int **)malloc(N * sizeof(int *)); // Aloca memória para a matriz
+  for (int i = 0; i < N; i++) {
+    matriz[i] = (int *)malloc(M * sizeof(int)); // Aloca memória para cada linha da matriz
+  }
+
+  int indice = 0;
+  preencherMatriz(matriz, vetor, N, M, 0, 0, &indice); // Preenche a matriz com valores do vetor
+
+    // Caso 1
+  if (op == 1) {
+    dobrarMatriz(matriz, N, M, 0, 0);
+    imprimirMatriz(matriz, N, M, 0, 0);
+  }
+
+    // Caso 2
+  else if (op == 2) {
+    int **transposta;
+    transposta = (int **)malloc(M * sizeof(int *)); // Aloca memória para a matriz transposta
+    for (int i = 0; i < M; i++) {
+      transposta[i] = (int *)malloc(N * sizeof(int)); // Aloca memória para cada linha da matriz transposta
+    }
+    transporMatriz(matriz, transposta, N, M, 0, 0);
+    imprimirMatriz(transposta, M, N, 0, 0);
+  }
+
+    //Caso 3
+  else if (op == 3) {
+    espelharMatrizHrz(matriz, N, M, 0, 0);
+    imprimirMatriz(matriz, N, M, 0, 0);
+  }
+
+    // Caso 4
+  else if (op == 4) {
+    espelharMatrizVtc(matriz, N, M, 0, 0);
+    imprimirMatriz(matriz, N, M, 0, 0);
+  }
+
+    // Caso 5
+  else if (op == 5) {
+    // Usa o espelhamento vertical e horizontal para espelhar diagonalmente
+    espelharMatrizHrz(matriz, N, M, 0, 0); 
+    espelharMatrizVtc(matriz, N, M, 0, 0);
+    imprimirMatriz(matriz, N, M, 0, 0);
+  }
+
+  // Liberar memória 
+  for (int i = 0; i < N; i++) {
+    free(matriz[i]);
+  }
+  free(matriz);
+  free(vetor);
+
+  return 0;
+}
